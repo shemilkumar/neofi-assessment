@@ -4,119 +4,12 @@ import Navbar from "./components/Navbar";
 import Button from "./components/ui/Button";
 import Input from "./components/ui/Input";
 import axios from "axios";
-import LensIcon from "./assets/svg/LensIcon";
-import CloseIcon from "./assets/svg/CloseIcon";
+import DropdownModal from "./components/DropdownModal";
+import Spinner from "./components/Spinner";
 
-interface Stoke {
+export interface Stoke {
   symbol: string;
   price: number;
-}
-
-interface DropdownModalProps {
-  handleDropdownClick: () => void;
-  handleSelectToken: (token: Stoke) => void;
-  selectedToken: Stoke;
-  tokenData: [Stoke];
-}
-
-interface GenerateTokenListProps {
-  handleDropdownClick: () => void;
-  handleSelectToken: (token: Stoke) => void;
-  selectedToken: Stoke;
-  tokens: Stoke[];
-}
-
-function GenerateTokenList({
-  tokens,
-  selectedToken,
-  handleDropdownClick,
-  handleSelectToken,
-}: GenerateTokenListProps) {
-  return (
-    <ul className="flex flex-col gap-2 text-sm text-white">
-      {tokens.map((token) => {
-        return (
-          <li
-            className={`flex items-center justify-between px-4 py-2 cursor-pointer ${
-              token.symbol === selectedToken.symbol ? "bg-[#1B192D]" : ""
-            }`}
-            onClick={() => {
-              handleDropdownClick();
-              handleSelectToken(token);
-            }}
-          >
-            <div className="flex items-center gap-4">
-              <img
-                src={`/src/assets/icons/${token.symbol.toLowerCase()}.png`}
-                alt="logo"
-                className="w-8 h-8 p-1 rounded-full"
-              />
-              <span>{token.symbol}</span>
-            </div>
-            {token.symbol === selectedToken.symbol ? (
-              <div className="flex items-center justify-between">
-                <img
-                  src="/src/assets/tick-vector.png"
-                  alt="logo"
-                  className="w-6 h-auto"
-                />
-              </div>
-            ) : null}
-          </li>
-        );
-      })}
-    </ul>
-  );
-}
-
-function DropdownModal({
-  handleDropdownClick,
-  handleSelectToken,
-  selectedToken,
-  tokenData,
-}: DropdownModalProps) {
-  const [searchOutputTokens, setSearchOutputTokens] = useState<Stoke[] | null>(
-    null
-  );
-
-  const handleSearch = (input: string) => {
-    if (!tokenData) return;
-    const searchData: Stoke[] | [] = tokenData.filter((token) =>
-      token.symbol.toLowerCase().includes(input.toLowerCase())
-    );
-
-    console.log(searchData);
-    setSearchOutputTokens(searchData);
-  };
-
-  return (
-    <div className="fixed top-0 left-0 z-50 w-full h-full text-white bg-[#0B0819]/80 ">
-      <div className="relative flex flex-col items-center pt-8 pb-16 -translate-x-1/2 top-80 left-1/2 w-[400px] px-10 bg-[#181627] h-[470px] rounded-2xl gap-6 border-[#3B79D4]/60 border-solid border-t">
-        <div onClick={handleDropdownClick}>
-          <CloseIcon className="absolute top-2 w-6 h-6 right-2 bg-[#6e56f826] fill-light rounded-md p-1 cursor-pointer" />
-        </div>
-        <div className="relative w-full">
-          <input
-            type="text"
-            placeholder="Search chains"
-            className={`w-full bg-transparent border-[#6E56F8]/25 text-white py-2 px-6 border-2 border-[#1C1731] rounded-full  pl-12`}
-            onChange={(e) => handleSearch(e.target.value)}
-          />
-          <LensIcon className="absolute ml-4 -translate-y-1/2 top-1/2" />
-        </div>
-        <div className="w-full h-[400px] overflow-y-auto scrollbar-hide">
-          <GenerateTokenList
-            tokens={
-              searchOutputTokens !== null ? searchOutputTokens : tokenData
-            }
-            handleDropdownClick={handleDropdownClick}
-            handleSelectToken={handleSelectToken}
-            selectedToken={selectedToken}
-          />
-        </div>
-      </div>
-    </div>
-  );
 }
 
 function App() {
@@ -133,17 +26,13 @@ function App() {
   const handleInvestment = (amount: number) => {
     setInvestingAmount(amount);
     if (selectedToken) {
-      if (selectedToken.price === 0) {
-        setNumberOfETH(0.0);
-      } else {
-        // console.log(amount, selectedToken.price * USD);
+      if (selectedToken.price === 0) setNumberOfETH(0.0);
+      else {
         const noOfETH = amount / (selectedToken.price * USD);
         setNumberOfETH(Math.floor(noOfETH));
       }
     } else setNumberOfETH(0.0);
   };
-
-  // const calculateNoOfETH = () =>
 
   useEffect(() => {
     const getAllToken = async () => {
@@ -153,15 +42,13 @@ function App() {
         );
         const minimumData: [Stoke] = data.slice(0, 25);
         setTokens(minimumData);
-        // console.log(tokens[0].symbol);
         setSelectedToken(minimumData[0]);
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     };
 
     getAllToken();
-    tokens && console.log(tokens[0].symbol);
   }, []);
 
   return (
@@ -230,31 +117,8 @@ function App() {
                     />
                   </div>
                 ) : (
-                  <div className="text-white">Loading...</div>
+                  <Spinner />
                 )}
-
-                {/* <select
-                  className="relative appearance-none cursor-pointer"
-                  onClick={handleDropdown}
-                >
-                  <option
-                    value=""
-                    className="flex items-center justify-between 
-                    w-full text-white py-3.5 px-6 rounded-lg bg-[#1C1731] border-2 border-[#1C1731]"
-                  >
-                    <img
-                      src="/src/assets/icons/ethbtc.png"
-                      alt="logo"
-                      className="object-cover w-7 h-7 p-1 bg-[#3387D5] rounded-full ml-6"
-                    />
-                    <span>Ethereum</span>
-                    <img
-                      src="/src/assets/dropdown-vector.png"
-                      alt="dropdown"
-                      className="pr-6"
-                    />
-                  </option>
-                </select> */}
 
                 <div className="">
                   <label
@@ -288,7 +152,6 @@ function App() {
                   >
                     Estimate Number of ETH You will get
                   </label>
-                  {/* <input type="number" placeholder='0.00' id='eth'  className='w-full'/> */}
                   <Input
                     type="number"
                     value={`${numberOfETH}`}
@@ -303,11 +166,9 @@ function App() {
               </form>
             </section>
           ) : (
-            <div>Loading...</div>
+            <Spinner />
           )}
         </div>
-
-        {/* Dropdown layout */}
       </Layout>
     </>
   );
