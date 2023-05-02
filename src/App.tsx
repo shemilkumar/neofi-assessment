@@ -70,7 +70,7 @@ function App() {
         >
           {tokens && selectedToken ? (
             <section
-              className="relative font-poppins flex flex-col w-[460px] items-center gap-4 px-10 bg-boxColor/70 rounded-xl pt-20 pb-12 border-1 border-light/50 border-t
+              className="relative font-poppins flex flex-col w-[460px] sm:w-[400px] xs:w-[350px] items-center gap-4 xs:gap-3 px-10 xs:px-6 bg-boxColor/70 rounded-xl pt-20 pb-12 xs:pt-12 xs:pb-8 border-1 border-light/50 border-t
             "
             >
               <div className="absolute z-20 flex items-center justify-center w-20 h-20 -translate-x-1/2 border-b rounded-full bg-dark -top-10 left-1/2 border-light">
@@ -83,17 +83,17 @@ function App() {
                 </div>
               </div>
 
-              <div className="flex justify-between w-full">
-                <span className="text-sm font-light text-light">
+              <div className="flex items-center justify-between w-full">
+                <span className="text-sm font-light text-light xs:text-xs">
                   Current value
                 </span>
-                <span className="font-semibold text-2xl text-[#627EEA]">
+                <span className="font-semibold text-2xl xs:text-xl text-[#627EEA]">
                   {selectedToken
                     ? `₹ ${(selectedToken.price * USD).toFixed(4)}`
                     : "₹ 0"}
                 </span>
               </div>
-              <form className="flex flex-col items-center gap-6">
+              <form className="flex flex-col items-center gap-6 xs:gap-3">
                 {selectedToken ? (
                   <div
                     className="relative cursor-pointer"
@@ -123,7 +123,7 @@ function App() {
                 <div className="">
                   <label
                     htmlFor="invest"
-                    className="text-sm font-light text-light "
+                    className="text-sm font-light xs:text-xs text-light "
                   >
                     Amount you want to invest
                   </label>
@@ -148,7 +148,7 @@ function App() {
                 <div>
                   <label
                     htmlFor="eth"
-                    className="mb-2 text-sm font-light text-light "
+                    className="mb-2 text-sm font-light xs:text-xs text-light "
                   >
                     Estimate Number of ETH You will get
                   </label>
@@ -157,7 +157,7 @@ function App() {
                     value={`${numberOfETH}`}
                     placeholder="0.00"
                     id="eth"
-                    className="mt-3 mb-8 text-xl font-bold"
+                    className="mt-3 mb-8 text-xl font-bold xs:mb-6"
                     disabled={true}
                   />
                 </div>
