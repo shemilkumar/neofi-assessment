@@ -11,7 +11,7 @@ const Navbar: FC<NavbarProps> = ({}) => {
       className="flex justify-between items-center font-poppins text-[#5A5A5A] bg-navbar
     px-64"
     >
-      <nav className="flex gap-4">
+      <nav className="flex gap-4 cursor-pointer">
         <div className="flex flex-col">
           <img src="/src/assets/logo/upper.png" alt="logo" />
           <img src="/src/assets/logo/lower.png" alt="logo" />
@@ -22,12 +22,12 @@ const Navbar: FC<NavbarProps> = ({}) => {
       </nav>
       <nav>
         <ul className="flex items-center h-full gap-2 text-base font-normal tracking-wide text-light/60">
-          <li className="font-semibold text-[#627EEA] py-6 px-4 border-b-2 border-[#627EEA]">
+          <li className="font-semibold text-[#627EEA] py-6 px-4 border-b-2 border-[#627EEA] cursor-pointer">
             Trade
           </li>
-          <li className="px-4 py-6">Earn</li>
-          <li className="px-4 py-6">Support</li>
-          <li className="px-4 py-6">About</li>
+          <li className="px-4 py-6 cursor-pointer">Earn</li>
+          <li className="px-4 py-6 cursor-pointer">Support</li>
+          <li className="px-4 py-6 cursor-pointer">About</li>
         </ul>
       </nav>
       <nav>

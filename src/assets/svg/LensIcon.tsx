@@ -14,14 +14,14 @@ const LensIcon: FC<LensIconProps> = ({ className = "" }) => {
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <g id="SVGRepo_bgCarrier" stroke-width="0" />
+      <g id="SVGRepo_bgCarrier" strokeWidth="0" />
 
       <g
         id="SVGRepo_tracerCarrier"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         stroke="#CCCCCC"
-        stroke-width="0.048"
+        strokeWidth="0.048"
       />
 
       <g id="SVGRepo_iconCarrier">
@@ -29,13 +29,13 @@ const LensIcon: FC<LensIconProps> = ({ className = "" }) => {
         <path
           d="M19.9604 11.4802C19.9604 13.8094 19.0227 15.9176 17.5019 17.4512C16.9332 18.0247 16.2834 18.5173 15.5716 18.9102C14.3594 19.5793 12.9658 19.9604 11.4802 19.9604C6.79672 19.9604 3 16.1637 3 11.4802C3 6.79672 6.79672 3 11.4802 3C16.1637 3 19.9604 6.79672 19.9604 11.4802Z"
           stroke="#D2D2D2"
-          stroke-width="1.392"
+          strokeWidth="1.392"
         />{" "}
         <path
           d="M18.1553 18.1553L21.8871 21.8871"
           stroke="#D2D2D2"
-          stroke-width="1.392"
-          stroke-linecap="round"
+          strokeWidth="1.392"
+          strokeLinecap="round"
         />{" "}
       </g>
     </svg>
