@@ -24,7 +24,8 @@ const Input: FC<InputProps> = ({
       id={id}
       disabled={disabled}
       placeholder={placeholder}
-      className={`w-full text-white py-3.5 px-6 rounded-lg bg-[#1C1731] border-2 border-[#1C1731] ${className}`}
+      className={`w-full text-white py-3.5 px-6 rounded-lg bg-[#1C1731] border-2 border-[#1C1731] 
+      [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${className}`}
     />
   );
 };

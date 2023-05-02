@@ -11,17 +11,23 @@ const Navbar: FC<NavbarProps> = ({}) => {
       className="flex justify-between items-center font-poppins text-[#5A5A5A] bg-navbar
     px-64"
     >
-      <nav className="text-3xl tracking-wide font-extrabold text-transparent bg-gradient-to-l from-blue-500 to-purple-600 bg-clip-text">
-        NeoFi
+      <nav className="flex gap-4">
+        <div className="flex flex-col">
+          <img src="/src/assets/logo/upper.png" alt="logo" />
+          <img src="/src/assets/logo/lower.png" alt="logo" />
+        </div>
+        <div className="my-auto">
+          <img src="/src/assets/logo/NeoFi.png" alt="logo" />
+        </div>
       </nav>
       <nav>
-        <ul className="flex items-center gap-2 text-base font-normal text-light/60 h-full tracking-wide">
+        <ul className="flex items-center h-full gap-2 text-base font-normal tracking-wide text-light/60">
           <li className="font-semibold text-[#627EEA] py-6 px-4 border-b-2 border-[#627EEA]">
             Trade
           </li>
-          <li className="py-6  px-4">Earn</li>
-          <li className="py-6  px-4">Support</li>
-          <li className="py-6  px-4">About</li>
+          <li className="px-4 py-6">Earn</li>
+          <li className="px-4 py-6">Support</li>
+          <li className="px-4 py-6">About</li>
         </ul>
       </nav>
       <nav>
