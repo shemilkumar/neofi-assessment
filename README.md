@@ -1,5 +1,7 @@
 This is a [React.js](https://react.dev/) project bootstrapped with [`vite`](https://vitejs.dev/).
 
+Live Url : [neofi-shemil.netlify.app](https://neofi-shemil.netlify.app/) 
+
 ## Technologies Used
 * React.js
 * Typescript
