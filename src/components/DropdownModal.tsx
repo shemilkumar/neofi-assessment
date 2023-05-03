@@ -3,32 +3,30 @@ import { Stoke } from "../App";
 import CloseIcon from "../assets/svg/CloseIcon";
 import LensIcon from "../assets/svg/LensIcon";
 import GenerateTokenList from "./GenerateTokenList";
-
+import { useSelector } from "react-redux";
 
 interface DropdownModalProps {
   handleDropdownClick: () => void;
   handleSelectToken: (token: Stoke) => void;
-  selectedToken: Stoke;
-  tokenData: [Stoke];
 }
 
 function DropdownModal({
   handleDropdownClick,
   handleSelectToken,
-  selectedToken,
-  tokenData,
 }: DropdownModalProps) {
   const [searchOutputTokens, setSearchOutputTokens] = useState<Stoke[] | null>(
     null
   );
+  const allTokensFromStore = useSelector(
+    (state: any) => state.tokens.allTokens
+  );
 
   const handleSearch = (input: string) => {
-    if (!tokenData) return;
-    const searchData: Stoke[] | [] = tokenData.filter((token) =>
+    if (!allTokensFromStore) return;
+    const searchData: Stoke[] | [] = allTokensFromStore.filter((token: Stoke) =>
       token.symbol.toLowerCase().includes(input.toLowerCase())
     );
 
-    console.log(searchData);
     setSearchOutputTokens(searchData);
   };
 
@@ -50,11 +48,12 @@ function DropdownModal({
         <div className="w-full h-[400px] overflow-y-auto scrollbar-hide">
           <GenerateTokenList
             tokens={
-              searchOutputTokens !== null ? searchOutputTokens : tokenData
+              searchOutputTokens !== null
+                ? searchOutputTokens
+                : allTokensFromStore
             }
             handleDropdownClick={handleDropdownClick}
             handleSelectToken={handleSelectToken}
-            selectedToken={selectedToken}
           />
         </div>
       </div>

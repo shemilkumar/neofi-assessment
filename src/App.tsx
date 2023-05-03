@@ -6,8 +6,10 @@ import Input from "./components/ui/Input";
 import axios from "axios";
 import DropdownModal from "./components/DropdownModal";
 import Spinner from "./components/Spinner";
-// import dropDownVector from "./assets/dropdown-vector.png";
 import dropDownVector from "../src/assets/dropdown-vector.png";
+import { useDispatch } from "react-redux";
+import { setAllTokens } from "./Redux/Slicers/tokensSlice";
+import { setSelectToken } from "./Redux/Slicers/selectedTokenSlice";
 
 export interface Stoke {
   symbol: string;
@@ -22,8 +24,14 @@ function App() {
   const [investingAmount, setInvestingAmount] = useState<number>();
   const [numberOfETH, setNumberOfETH] = useState<number>();
 
+  const dispatch = useDispatch();
+
   const handleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
-  const handleSelectToken = (token: Stoke) => setSelectedToken(token);
+
+  const handleSelectToken = (token: Stoke) => {
+    setSelectedToken(token);
+    dispatch(setSelectToken(token));
+  };
 
   const handleInvestment = (amount: number) => {
     setInvestingAmount(amount);
@@ -44,23 +52,23 @@ function App() {
         );
         const minimumData: [Stoke] = data.slice(0, 25);
         setTokens(minimumData);
+        dispatch(setAllTokens(minimumData));
         setSelectedToken(minimumData[0]);
+        dispatch(setSelectToken(minimumData[0]));
       } catch (error) {
         alert(error);
       }
     };
 
     getAllToken();
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
       <Navbar />
       <Layout>
-        {isDropdownOpen && selectedToken && tokens && (
+        {isDropdownOpen && (
           <DropdownModal
-            tokenData={tokens}
-            selectedToken={selectedToken}
             handleDropdownClick={handleDropdown}
             handleSelectToken={handleSelectToken}
           />
@@ -78,7 +86,6 @@ function App() {
               <div className="absolute z-20 flex items-center justify-center w-20 h-20 -translate-x-1/2 border-b rounded-full bg-dark -top-10 left-1/2 border-light">
                 <div className="flex items-center justify-center w-16 h-16 rounded-full bg-[#1C1731] ">
                   <img
-                    // src={`/src/assets/icons/${selectedToken.symbol.toLowerCase()}.png`}
                     src={`/icons/${selectedToken.symbol.toLowerCase()}.png`}
                     alt="logo"
                     className="object-cover w-12 h-12 p-1 bg-[#3387D5] rounded-full"
@@ -130,7 +137,6 @@ function App() {
                   >
                     Amount you want to invest
                   </label>
-                  {/* <input type="number" placeholder='0.00' id='invest' className='w-full'/> */}
                   <div className="relative w-full">
                     <span className="absolute inset-y-0 flex items-center px-2 mt-3 text-base text-white right-4">
                       INR
