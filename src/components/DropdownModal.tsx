@@ -4,6 +4,7 @@ import CloseIcon from "../assets/svg/CloseIcon";
 import LensIcon from "../assets/svg/LensIcon";
 import GenerateTokenList from "./GenerateTokenList";
 
+
 interface DropdownModalProps {
   handleDropdownClick: () => void;
   handleSelectToken: (token: Stoke) => void;

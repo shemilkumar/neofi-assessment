@@ -1,4 +1,5 @@
 import { Stoke } from "../App";
+import tickVector from "../assets/tick-vector.png";
 
 interface GenerateTokenListProps {
   handleDropdownClick: () => void;
@@ -28,7 +29,7 @@ function GenerateTokenList({
           >
             <div className="flex items-center gap-4">
               <img
-                src={`/src/assets/icons/${token.symbol.toLowerCase()}.png`}
+                src={`/icons/${token.symbol.toLowerCase()}.png`}
                 alt="logo"
                 className="w-8 h-8 p-1 rounded-full"
               />
@@ -36,11 +37,7 @@ function GenerateTokenList({
             </div>
             {token.symbol === selectedToken.symbol ? (
               <div className="flex items-center justify-between">
-                <img
-                  src="/src/assets/tick-vector.png"
-                  alt="logo"
-                  className="w-6 h-auto"
-                />
+                <img src={tickVector} alt="logo" className="w-6 h-auto" />
               </div>
             ) : null}
           </li>

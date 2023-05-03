@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { FC, useState } from "react";
 import Button from "./ui/Button";
+import logoUpper from "../assets/logo/upper.png";
+import logoLower from "../assets/logo/lower.png";
+import NeoFi from "../assets/logo/NeoFi.png";
 
 interface NavbarProps {}
 
@@ -17,11 +20,11 @@ const Navbar: FC<NavbarProps> = ({}) => {
     >
       <nav className="flex gap-4 cursor-pointer">
         <div className="flex flex-col">
-          <img src="/src/assets/logo/upper.png" alt="logo" />
-          <img src="/src/assets/logo/lower.png" alt="logo" />
+          <img src={logoUpper} alt="logo" />
+          <img src={logoLower} alt="logo" />
         </div>
         <div className="my-auto">
-          <img src="/src/assets/logo/NeoFi.png" alt="logo" />
+          <img src={NeoFi} alt="logo" />
         </div>
       </nav>
 

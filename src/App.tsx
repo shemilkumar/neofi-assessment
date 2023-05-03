@@ -6,6 +6,8 @@ import Input from "./components/ui/Input";
 import axios from "axios";
 import DropdownModal from "./components/DropdownModal";
 import Spinner from "./components/Spinner";
+// import dropDownVector from "./assets/dropdown-vector.png";
+import dropDownVector from "../src/assets/dropdown-vector.png";
 
 export interface Stoke {
   symbol: string;
@@ -76,7 +78,8 @@ function App() {
               <div className="absolute z-20 flex items-center justify-center w-20 h-20 -translate-x-1/2 border-b rounded-full bg-dark -top-10 left-1/2 border-light">
                 <div className="flex items-center justify-center w-16 h-16 rounded-full bg-[#1C1731] ">
                   <img
-                    src={`/src/assets/icons/${selectedToken.symbol.toLowerCase()}.png`}
+                    // src={`/src/assets/icons/${selectedToken.symbol.toLowerCase()}.png`}
+                    src={`/icons/${selectedToken.symbol.toLowerCase()}.png`}
                     alt="logo"
                     className="object-cover w-12 h-12 p-1 bg-[#3387D5] rounded-full"
                   />
@@ -100,7 +103,7 @@ function App() {
                     onClick={handleDropdown}
                   >
                     <img
-                      src={`/src/assets/icons/${selectedToken.symbol.toLowerCase()}.png`}
+                      src={`/icons/${selectedToken.symbol.toLowerCase()}.png`}
                       alt="logo"
                       className="absolute object-cover w-7 top-1/2 -translate-y-1/2 h-7 p-1 bg-[#3387D5] rounded-full ml-6"
                     />
@@ -111,7 +114,7 @@ function App() {
                       disabled={true}
                     />
                     <img
-                      src="/src/assets/dropdown-vector.png"
+                      src={dropDownVector}
                       alt="dropdown"
                       className="absolute -translate-y-1/2 top-1/2 right-6"
                     />
