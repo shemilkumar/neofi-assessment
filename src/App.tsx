@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setAllTokens } from "./Redux/Slicers/tokensSlice";
+import { setSelectToken } from "./Redux/Slicers/selectedTokenSlice";
+import dropDownVector from "../src/assets/dropdown-vector.png";
+
 import Layout from "./components/Layout";
 import Navbar from "./components/Navbar";
 import Button from "./components/ui/Button";
 import Input from "./components/ui/Input";
-import axios from "axios";
 import DropdownModal from "./components/DropdownModal";
 import Spinner from "./components/Spinner";
-import dropDownVector from "../src/assets/dropdown-vector.png";
-import { useDispatch } from "react-redux";
-import { setAllTokens } from "./Redux/Slicers/tokensSlice";
-import { setSelectToken } from "./Redux/Slicers/selectedTokenSlice";
 
 export interface Stoke {
   symbol: string;
@@ -26,13 +27,17 @@ function App() {
 
   const dispatch = useDispatch();
 
+  // Toggle dropdown menu
   const handleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
+  // Handling the selected token from dropdown
   const handleSelectToken = (token: Stoke) => {
     setSelectedToken(token);
+    // storing selected token to the redux store
     dispatch(setSelectToken(token));
   };
 
+  // Calculating number of ETH using investing amount input value
   const handleInvestment = (amount: number) => {
     setInvestingAmount(amount);
     if (selectedToken) {
@@ -44,6 +49,7 @@ function App() {
     } else setNumberOfETH(0.0);
   };
 
+  // API call for getting all tokens and its prices using Binance api
   useEffect(() => {
     const getAllToken = async () => {
       try {
@@ -51,9 +57,12 @@ function App() {
           "https://api.binance.com/api/v3/ticker/price"
         );
         const minimumData: [Stoke] = data.slice(0, 25);
+
         setTokens(minimumData);
-        dispatch(setAllTokens(minimumData));
         setSelectedToken(minimumData[0]);
+
+        // Storing all tokens and first token to Redux store
+        dispatch(setAllTokens(minimumData));
         dispatch(setSelectToken(minimumData[0]));
       } catch (error) {
         alert(error);
@@ -67,12 +76,18 @@ function App() {
     <>
       <Navbar />
       <Layout>
+        {/* If dropdown is clicked then dropdown modal will be visible(full screen)
+         otherwise it is hidden */}
+        {/* Passing dropdown toggle function for closing the dropdown and handleSelect token
+         for changing the selectedToken state */}
         {isDropdownOpen && (
           <DropdownModal
             handleDropdownClick={handleDropdown}
             handleSelectToken={handleSelectToken}
           />
         )}
+
+        {/* Main section */}
         <div
           className={`flex items-center justify-center h-screen text-light ${
             isDropdownOpen ? "overflow-y-hidden" : ""

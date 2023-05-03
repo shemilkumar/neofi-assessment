@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { Stoke } from "../App";
 import CloseIcon from "../assets/svg/CloseIcon";
@@ -17,12 +18,18 @@ function DropdownModal({
   const [searchOutputTokens, setSearchOutputTokens] = useState<Stoke[] | null>(
     null
   );
+
+  // Getting All token from redux store
   const allTokensFromStore = useSelector(
     (state: any) => state.tokens.allTokens
   );
 
+  // Handling search
   const handleSearch = (input: string) => {
     if (!allTokensFromStore) return;
+
+    // If the user enter a value in search box, check the value is in the token name
+    // so value inlcuded token names are stored in searchData and seting search state
     const searchData: Stoke[] | [] = allTokensFromStore.filter((token: Stoke) =>
       token.symbol.toLowerCase().includes(input.toLowerCase())
     );
@@ -46,6 +53,10 @@ function DropdownModal({
           <LensIcon className="absolute ml-4 -translate-y-1/2 top-1/2" />
         </div>
         <div className="w-full h-[400px] overflow-y-auto scrollbar-hide">
+          {/* Passing searchOutput if the user enter anything in the searchbox
+          otherwise passing allTokens from redux store */}
+          {/* Passing dropdown toggle function for closing the dropdown and handleSelect token
+         for changing the selectedToken state */}
           <GenerateTokenList
             tokens={
               searchOutputTokens !== null

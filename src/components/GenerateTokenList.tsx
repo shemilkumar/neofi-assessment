@@ -14,6 +14,7 @@ function GenerateTokenList({
   handleDropdownClick,
   handleSelectToken,
 }: GenerateTokenListProps) {
+  // Getting selected token from Redux store
   const selectedTokenFromStore = useSelector(
     (state: any) => state.selectedToken.selectedToken
   );
